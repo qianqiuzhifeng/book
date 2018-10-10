@@ -41,3 +41,27 @@
 * 缓存
 
 * 监听器和其他回调
+
+### 第7条 避免使用终结方法
+
+## 对所有对象都通用的方法
+
+### 第8条 覆盖equals方法时请遵守通用约定
+
+约定内容：
+
+equals方法实现了等价关系。
+
+* 自反性。对于任何非null的引用值x, x.equals(x)必须返回True。
+
+* 对称性。对于任何非null的引用值x和y，当且仅当y.equals(x)返回true时，x.equals(y)必须返回为true。
+
+* 传递性。对于任何非null的引用值x,y和z。如果x.equals(y)返回true，并且y.equals(z)也返回true，那么x.equals(z)也必须返回true。
+
+* 一致性。对于任何非null的引用值x和y，只有equals的比较操作对象中所用的信息没有被修改，多次调用x.equals(y)就会一致地返回true，或者一致地返回false。
+
+对于任何非null的引用值x，x.equals(null)必须返回false。
+
+### 第9条 覆盖equals时总是要覆盖hashCode
+
+### 第10条 始终要覆盖toString
