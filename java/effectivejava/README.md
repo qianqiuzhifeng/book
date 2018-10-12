@@ -122,5 +122,116 @@ equals方法实现了等价关系。
 
 ### 第17条 要么为继承而设计，并提供文档说明，要么就禁止继承
 
-### 接口优于抽象类
+### 第18条 接口优于抽象类
+
+### 第19条 接口只用于定义类型
+
+### 第20条 类层次优于标签类
+
+### 第21条 用函数对象表示策略
+
+### 第22条 优先考虑静态成员类
+
+嵌套类：
+
+* 静态成员类
+
+(1)静态成员类可以看做普通的类。
+(2)静态成员类可以访问外围类的所有成员，包括那些声明为私有的成员。
+(3)静态成员类是外围内的静态成员，与其他静态成员一样，遵守同样的可访问性规则。
+
+静态成员类的一种常见用法是作为公用的辅助类，仅当它与外部类一起使用时才有意义。
+
+私有静态成员类的一种常见用法是作为外围类所代表的对象的组件。
+
+```java
+public class Outer {
+
+    private static final String PARAM = "Param";
+    //静态成员类
+    public static final class StaticClass{
+        private StaticClass(){
+        }
+        private static final void print(){
+            System.out.print(PARAM);
+        }
+    }
+    public static void main(String[] args){
+        StaticClass.print();
+    }
+}
+````
+
+* 非静态成员类
+
+静态成员类与非静态成员类的区别：
+
+(1)语法上：非静态成员类没有static修饰符。
+(2)用法上：非静态成员类的每个实例都隐含着与一个外围类的一个外围实例相关联。
+
+非静态成员类的一种常见的用法是定义一个Adapter,它允许外部类的实例被看作是另一个不相关类的实例。
+
+```java
+package qian.qiu.zhi.feng;
+
+public class Outer {
+
+    private static final String PARAM = "Param";
+
+    public class  UnStaticClass{
+        private void print(){
+            System.out.print(PARAM);
+        }
+    }
+    public static void main(String[] args){
+        new Outer().new UnStaticClass().print();
+    }
+}
+
+```
+
+* 匿名类
+
+(1)匿名类的声明是由java编译器自动派生自一个类实例创建表达式。
+(2)匿名类永远不能是抽象的。
+(3)匿名类总是隐式的final。
+(4)匿名类总是一个内部类；并且不能是static的。
+
+```java
+
+interface D{
+    void ShowContext();
+}
+
+new D(){
+    @Override
+    public void ShowContext() {
+        System.out.println("hello");
+    }
+}
+```
+
+* 局部类
+
+(1)在任何”可以声明局部变量“的地方，都可以声明局部类，并且局部类也遵守同样的作用域规则。
+
+```java
+public class Test {
+    {
+        class AA{}//块内局部类
+    }
+    public Test(){
+        class AA{}//构造器内局部类
+    }
+    public static void main(String[] args){
+    }
+    public void test(){
+        class AA{}//方法内局部类
+    }
+}
+```
+
+## 泛型
+
+### 第23条 请不要在代码中使用原生态类型
 
